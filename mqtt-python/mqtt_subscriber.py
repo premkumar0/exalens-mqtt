@@ -52,7 +52,7 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 # Connect to MQTT Broker
-client.connect(mqtt_broker_host, mqtt_broker_port)
+client.connect(mqtt_broker_host, mqtt_broker_port, 30)
 
 # Start the MQTT subscriber
 client.loop_forever()
