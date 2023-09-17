@@ -8,9 +8,9 @@ services:
       - "1883:1883" # MQTT port
       - "9001:9001" # WebSockets/WebSockets Secure port (optional)
     volumes:
-      - mosquitto-config:/mosquitto/config
-      - mosquitto-data:/mosquitto/data
-      - mosquitto-log:/mosquitto/log
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
     environment:
       MQTT_BROKER_HOST: "mosquitto" # Replace with the actual MQTT broker host
       MQTT_BROKER_PORT: 1883 # Replace with the actual MQTT broker port
@@ -38,7 +38,7 @@ services:
     environment:
       MQTT_BROKER_HOST: "mosquitto" # Replace with the actual MQTT broker host
       MQTT_BROKER_PORT: 1883 # Replace with the actual MQTT broker port
-      MONGODB_URI: "mongodb://mongodb:27017/" # Use the service name as the hostname
+      MONGODB_URI: "mongodb://admin:password@mongodb:27017/" # Use the service name as the hostname
     networks:
       - mqtt-network
     depends_on:
@@ -76,7 +76,4 @@ networks:
   mqtt-network:
 
 volumes:
-  mosquitto-config:
-  mosquitto-data:
-  mosquitto-log:
   mongodb-data:

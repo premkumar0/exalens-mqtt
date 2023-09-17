@@ -6,7 +6,7 @@ import os
 # MQTT Broker Settings
 mqtt_broker_host = os.getenv("MQTT_BROKER_HOST", "localhost")
 mqtt_broker_port = int(os.getenv("MQTT_BROKER_PORT", 1883))
-mqtt_topic = "sensors/temperature"
+mqtt_topic_temperature = "sensors/temperature"
 mqtt_topic_humidity = "sensors/humidity"
 
 # MongoDB Settings
@@ -41,8 +41,8 @@ client = mqtt.Client()
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connected to MQTT Broker")
-        client.subscribe(mqtt_topic)
-        client.subscribe(mqtt_topic_humidity)
+        client.subscribe(mqtt_topic_temperature, 2)
+        client.subscribe(mqtt_topic_humidity, 2)
 
     else:
         print("Connection failed")
