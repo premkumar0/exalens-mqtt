@@ -1,0 +1,73 @@
+version: "3"
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    ports:
+      - "1883:1883" # MQTT port
+      - "9001:9001" # WebSockets/WebSockets Secure port (optional)
+    volumes:
+      - mosquitto-config:/mosquitto/config
+      - mosquitto-data:/mosquitto/data
+      - mosquitto-log:/mosquitto/log
+    environment:
+      MQTT_BROKER_HOST: "mosquitto" # Replace with the actual MQTT broker host
+      MQTT_BROKER_PORT: 1883 # Replace with the actual MQTT broker port
+    networks:
+      - mqtt-network
+
+  mqtt-publisher:
+    build:
+      context: ./mqtt-python/pub.Dockerfile
+    container_name: mqtt-publisher
+    environment:
+      MQTT_BROKER_HOST: "mosquitto" # Replace with the actual MQTT broker host
+      MQTT_BROKER_PORT: 1883 # Replace with the actual MQTT broker port
+    networks:
+      - mqtt-network
+
+  mqtt-subscriber:
+    build:
+      context: ./mqtt-python/sub.Dockerfile
+    container_name: mqtt-subscriber
+    environment:
+      MQTT_BROKER_HOST: "mosquitto" # Replace with the actual MQTT broker host
+      MQTT_BROKER_PORT: 1883 # Replace with the actual MQTT broker port
+      MONGODB_URI: "mongodb://mongodb:27017/" # Use the service name as the hostname
+    networks:
+      - mqtt-network
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongodb-data:/data/db # Mount volume for MongoDB data
+    networks:
+      - mqtt-network
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_SERVER: mongodb # Use the service name as the hostname
+    networks:
+      - mqtt-network
+
+networks:
+  mqtt-network:
+
+volumes:
+  mosquitto-config:
+  mosquitto-data:
+  mosquitto-log:
+  mongodb-data:
