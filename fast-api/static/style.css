@@ -1,0 +1,34 @@
+/* Center the content vertically and horizontally */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Style the forms */
+form {
+    display: inline-block;
+    margin: 10px;
+}
+
+/* Style form elements */
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"] {
+    width: 150px;
+    padding: 5px;
+}
+
+form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}

@@ -17,7 +17,7 @@ mqtt_topic_humidity = "sensors/humidity"
 def generrate_temperature():
     sensor_id = "temp_sensor_001"
     value = round(random.uniform(30, 50), 2)  # Random reading between 0 and 100
-    timestamp = datetime.now().isoformat()
+    timestamp = datetime.utcnow().isoformat()
     payload = {"sensor_id": sensor_id, "value": value, "timestamp": timestamp}
     return json.dumps(payload)
 
@@ -26,7 +26,7 @@ def generrate_temperature():
 def generrate_humidity():
     sensor_id = "humd_sensor_001"
     value = round(random.uniform(40, 80), 2)  # Random reading between 0 and 100
-    timestamp = datetime.now().isoformat()
+    timestamp = datetime.utcnow().isoformat()
     payload = {"sensor_id": sensor_id, "value": value, "timestamp": timestamp}
     return json.dumps(payload)
 
