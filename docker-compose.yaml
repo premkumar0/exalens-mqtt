@@ -85,6 +85,22 @@ services:
     depends_on:
       - mongodb
 
+  fastapi-app:
+    build:
+      context: ./fast-api
+      dockerfile: Dockerfile
+    container_name: fastapi-app
+    ports:
+      - "8000:8000"
+    environment:
+      MONGODB_URI: mongodb://admin:password@mongodb:27017/
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - mqtt-subscriber
+    networks:
+      - mqtt-network
+
 networks:
   mqtt-network:
 
