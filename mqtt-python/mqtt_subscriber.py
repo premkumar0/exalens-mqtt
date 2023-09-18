@@ -24,17 +24,18 @@ redis_port = int(os.getenv("REDIS_PORT", 6379))
 # Callback when a message is received
 def on_message(client, userdata, message):
     try:
-        payload = json.loads(message.payload.decode("utf-8"))
+        payload_str = message.payload.decode("utf-8")
+        payload = json.loads(payload_str)
         store_message_in_mongodb(payload)
         print(f"Received and stored message: {payload}")
         if message.topic == mqtt_topic_temperature:
             # Push the reading to Redis
-            redis_client.lpush("temperature", payload)
+            redis_client.lpush("temperature", payload_str)
             # Trim the list to keep the last ten readings
             redis_client.ltrim("temperature", 0, 9)
         elif message.topic == mqtt_topic_humidity:
             # Push the reading to Redis
-            redis_client.lpush("humidity", payload)
+            redis_client.lpush("humidity", payload_str)
             # Trim the list to keep the last ten readings
             redis_client.ltrim("humidity", 0, 9)
     except Exception as e:
