@@ -25,7 +25,13 @@ To run this project, follow these steps:
 3. **Run the Docker Compose**: Use the following command to build and start the services.
 
    ```shell
-   docker-compose -d up --build
+   docker compose up -d --build
+   ```
+
+   or
+
+   ```
+   docker-compose up -d --build
    ```
 
 4. **Set Up MongoDB**: Access the Mongo Express web interface at `http://localhost:8081`. Create a database named `mqtt_data` and a collection named `sensor_readings`.
