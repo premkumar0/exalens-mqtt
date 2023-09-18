@@ -8,36 +8,38 @@
 
     <body>
         <h1>Home Page</h1>
+        <div class="content">
+            <div id="form-1">
+                <h3>Fetch Sensor Readings by submitting start and end time</h3>
+                <form action="/get_from_mongodb/" method="post">
+                    <label for="mongodb_selection">Select Topic:</label>
+                    <select id="mongodb_selection" name="selection">
+                        <option value="temp_sensor_001">Temperature</option>
+                        <option value="humd_sensor_001">Humidity</option>
+                    </select>
 
-        <form action="/get_from_mongodb/" method="post">
-            <label for="mongodb_selection">Select Data:</label>
-            <select id="mongodb_selection" name="selection">
-                <option value="temp_sensor_001">Temperature</option>
-                <option value="humd_sensor_001">Humidity</option>
-            </select>
+                    <label for="mongodb_start_time">Start Time:</label>
+                    <input type="datetime-local" id="mongodb_start_time" name="start_time"
+                        value="{{ default_start_time }}">
 
-            <label for="mongodb_start_time">Start Time:</label>
-            <input type="datetime-local" id="mongodb_start_time" name="start_time" value="{{ default_start_time }}">
+                    <label for="mongodb_end_time">End Time:</label>
+                    <input type="datetime-local" id="mongodb_end_time" name="end_time" value="{{ default_end_time }}">
 
-            <label for="mongodb_end_time">End Time:</label>
-            <input type="datetime-local" id="mongodb_end_time" name="end_time" value="{{ default_end_time }}">
-
-            <button type="submit">Get MongoDB Data</button>
-        </form>
-
-        <form action="/get_from_redis/" method="post" enctype="application/json">
-            <label for=" redis_selection">Select Data:</label>
-            <select id="redis_selection" name="selection">
-                <option value="temperature">Temperature</option>
-                <option value="humidity">Humidity</option>
-            </select>
-            <button type="submit">Get Redis Data</button>
-        </form>
-
-
-        <script>
-            // No JavaScript code needed here since the default values are set using Jinja2 templates.
-        </script>
+                    <button type="submit">Get Data</button>
+                </form>
+            </div>
+            <div id="form-2">
+                <h3>Fetch latest 10 readings of a topic</h3>
+                <form action="/get_from_redis/" method="post" enctype="application/json">
+                    <label for=" redis_selection">Select Topic:</label>
+                    <select id="redis_selection" name="selection">
+                        <option value="temperature">Temperature</option>
+                        <option value="humidity">Humidity</option>
+                    </select>
+                    <button type="submit">Get Data</button>
+                </form>
+            </div>
+        </div>
     </body>
 
 </html>
