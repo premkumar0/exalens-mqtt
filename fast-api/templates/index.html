@@ -21,9 +21,11 @@
                     <label for="mongodb_start_time">Start Time:</label>
                     <input type="datetime-local" id="mongodb_start_time" name="start_time"
                         value="{{ default_start_time }}">
+                    <small>Note:- please input utc time only</small>
 
                     <label for="mongodb_end_time">End Time:</label>
                     <input type="datetime-local" id="mongodb_end_time" name="end_time" value="{{ default_end_time }}">
+                    <small>Note:- please input utc time only</small>
 
                     <button type="submit">Get Data</button>
                 </form>
