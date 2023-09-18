@@ -12,14 +12,20 @@ mqtt_broker_port = int(os.getenv("MQTT_BROKER_PORT", 1883))
 mqtt_topic_temperature = "sensors/temperature"
 mqtt_topic_humidity = "sensors/humidity"
 
-# List of unique sensor IDs
-sensor_ids = ["sensor1", "sensor2", "sensor3"]
+
+# Function to generate a random sensor reading
+def generrate_temperature():
+    sensor_id = "temp_sensor_001"
+    value = round(random.uniform(30, 50), 2)  # Random reading between 0 and 100
+    timestamp = datetime.now().isoformat()
+    payload = {"sensor_id": sensor_id, "value": value, "timestamp": timestamp}
+    return json.dumps(payload)
 
 
 # Function to generate a random sensor reading
-def generate_sensor_reading():
-    sensor_id = random.choice(sensor_ids)
-    value = round(random.uniform(0, 100), 2)  # Random reading between 0 and 100
+def generrate_humidity():
+    sensor_id = "humd_sensor_001"
+    value = round(random.uniform(40, 80), 2)  # Random reading between 0 and 100
     timestamp = datetime.now().isoformat()
     payload = {"sensor_id": sensor_id, "value": value, "timestamp": timestamp}
     return json.dumps(payload)
@@ -43,14 +49,15 @@ client.connect(mqtt_broker_host, mqtt_broker_port, 30)
 
 # Publish sensor readings at regular intervals
 while True:
-    sensor_reading = generate_sensor_reading()
+    temp_readings = generrate_temperature()
+    humd_readings = generrate_humidity()
 
     # Publish to Temperature Topic
-    client.publish(mqtt_topic_temperature, sensor_reading)
-    print(f"Published to {mqtt_topic_temperature}: {sensor_reading}")
+    client.publish(mqtt_topic_temperature, temp_readings)
+    print(f"Published to {mqtt_topic_temperature}: {temp_readings}")
 
     # Publish to Humidity Topic
-    client.publish(mqtt_topic_humidity, sensor_reading)
-    print(f"Published to {mqtt_topic_humidity}: {sensor_reading}")
+    client.publish(mqtt_topic_humidity, humd_readings)
+    print(f"Published to {mqtt_topic_humidity}: {humd_readings}")
 
     time.sleep(5)  # Adjust the interval as needed

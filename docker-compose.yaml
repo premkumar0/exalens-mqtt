@@ -1,6 +1,16 @@
 version: "3"
 
 services:
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - mqtt-network
+
   mosquitto:
     image: eclipse-mosquitto
     container_name: mosquitto
@@ -39,11 +49,14 @@ services:
       MQTT_BROKER_HOST: "mosquitto" # Replace with the actual MQTT broker host
       MQTT_BROKER_PORT: 1883 # Replace with the actual MQTT broker port
       MONGODB_URI: "mongodb://admin:password@mongodb:27017/" # Use the service name as the hostname
+      REDIS_HOST: "redis"
+      REDIS_PORT: 6379
     networks:
       - mqtt-network
     depends_on:
       - mosquitto
       - mongodb
+      - redis
 
   mongodb:
     image: mongo
@@ -77,3 +90,4 @@ networks:
 
 volumes:
   mongodb-data:
+  redis-data:
