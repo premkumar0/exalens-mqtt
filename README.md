@@ -61,8 +61,13 @@ Now, the entire system is up and running, ready to monitor sensor readings.
    - Purpose: Provides a web interface for managing MongoDB databases and collections. Use it to create the necessary database and collection.
 
 6. **fastapi-app**:
+
    - Configuration: A custom Python FastAPI application.
    - Purpose: Provides API endpoints to fetch sensor readings as per the challenge requirements.
+
+7. **redis**:
+   - Configuration: Redis server setup.
+   - Purpose: Stores the latest ten sensor readings for fast access.
 
 ## Design Choices
 
