@@ -34,9 +34,9 @@ To run this project, follow these steps:
    docker-compose up -d --build
    ```
 
-4. **Set Up MongoDB**: Access the Mongo Express web interface at `http://localhost:8081`. Create a database named `mqtt_data` and a collection named `sensor_readings`.
+4. **Set Up MongoDB**: By deafule mongodb creates its required database and collection. In case of any Failure Access the Mongo Express web interface at `http://localhost:8081`. Create a database named `mqtt_data` and a collection named `sensor_readings`.
 
-Now, the entire system is up and running, ready to monitor sensor readings.
+Now, the entire system is up and running, ready to monitor sensor readings. you can visit FASTAPI endpint at [localhost:8000](http://localhost:8000)
 
 ## Project Structure
 
