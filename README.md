@@ -1,4 +1,4 @@
-# Exalens MQTT Monitoring System
+# MQTT Monitoring System with simulated sensor data
 
 This project simulates the behavior of sensors, monitors their readings, and provides APIs to retrieve data based on specific criteria. It uses Docker containers to deploy various services and is designed to be easy to set up and interact with.
 
@@ -69,7 +69,7 @@ Now, the entire system is up and running, ready to monitor sensor readings. you 
 6. **fastapi-app**:
 
    - Configuration: A custom Python FastAPI application.
-   - Purpose: Provides API endpoints to fetch sensor readings as per the challenge requirements.
+   - Purpose: Provides API endpoints to fetch sensor readings.
 
 7. **redis**:
    - Configuration: Redis server setup.
@@ -97,6 +97,4 @@ During the development of this project, we encountered several challenges:
 
 We hope you find this project informative and well-structured. If you have any questions or need further clarification on any aspect of the code or documentation, please feel free to reach out.
 
-Thank you for considering my submission, and I look forward to your feedback.
-
-For more information about my profile, including my background, skills, and previous projects, please visit [my personal website](https://premkumar0.github.io/).
+For more information about my profile, including my background, skills, and previous projects, please visit my profile [@premkumar](https://premkumar0.github.io/).
